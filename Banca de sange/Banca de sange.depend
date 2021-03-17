@@ -1,0 +1,139 @@
+# depslib dependency file v1.0
+1615540808 source:c:\users\admin\desktop\maria\banca de sange\main.cpp
+	<bits/stdc++.h>
+	<windows.h>
+	<conio.h>
+	<unistd.h>
+	<chrono>
+	<thread>
+	"fisiere.h"
+	"functii.h"
+	"ui.h"
+
+1615835941 source:c:\users\admin\desktop\maria\banca de sange\fisiere.cpp
+	<bits/stdc++.h>
+	"structs.h"
+	"functii.h"
+
+1615745121 c:\users\admin\desktop\maria\banca de sange\structs.h
+
+1615540119 c:\users\admin\desktop\maria\banca de sange\functii.h
+	"structs.h"
+
+1615811499 source:c:\users\admin\desktop\maria\banca de sange\functii.cpp
+	<bits/stdc++.h>
+	<windows.h>
+	<conio.h>
+	<unistd.h>
+	<chrono>
+	<thread>
+	"structs.h"
+
+1615544352 source:c:\users\admin\desktop\maria\banca de sange\ui.cpp
+	<bits/stdc++.h>
+	<windows.h>
+	<conio.h>
+	<unistd.h>
+	<chrono>
+	<thread>
+	<stdio.h>
+	"functii.h"
+	"fisiere.h"
+
+1615836016 c:\users\admin\desktop\maria\banca de sange\fisiere.h
+	"structs.h"
+
+1615492078 c:\users\admin\desktop\maria\banca de sange\ui.h
+
+1615991562 source:c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\banca de sange\functii.cpp
+	<bits/stdc++.h>
+	<windows.h>
+	<conio.h>
+	<unistd.h>
+	<chrono>
+	<thread>
+	"structs.h"
+
+1615745121 c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\banca de sange\structs.h
+
+1615540808 source:c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\banca de sange\main.cpp
+	<bits/stdc++.h>
+	<windows.h>
+	<conio.h>
+	<unistd.h>
+	<chrono>
+	<thread>
+	"fisiere.h"
+	"functii.h"
+	"ui.h"
+
+1615836016 c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\banca de sange\fisiere.h
+	"structs.h"
+
+1615975232 c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\banca de sange\functii.h
+	"structs.h"
+
+1615492078 c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\banca de sange\ui.h
+
+1615991524 source:c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\banca de sange\ui.cpp
+	<bits/stdc++.h>
+	<windows.h>
+	<conio.h>
+	<unistd.h>
+	<chrono>
+	<thread>
+	<stdio.h>
+	"functii.h"
+	"fisiere.h"
+
+1615971170 source:c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\banca de sange\fisiere.cpp
+	<bits/stdc++.h>
+	"structs.h"
+	"functii.h"
+
+1616001776 source:c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\blood-bank\banca de sange\fisiere.cpp
+	<bits/stdc++.h>
+	"structs.h"
+	"functii.h"
+
+1615745121 c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\blood-bank\banca de sange\structs.h
+
+1615975232 c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\blood-bank\banca de sange\functii.h
+	"structs.h"
+
+1616001630 source:c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\blood-bank\banca de sange\functii.cpp
+	<bits/stdc++.h>
+	<windows.h>
+	<conio.h>
+	<unistd.h>
+	<chrono>
+	<thread>
+	"structs.h"
+
+1616001885 source:c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\blood-bank\banca de sange\main.cpp
+	<bits/stdc++.h>
+	<windows.h>
+	<conio.h>
+	<unistd.h>
+	<chrono>
+	<thread>
+	"fisiere.h"
+	"functii.h"
+	"ui.h"
+
+1615836016 c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\blood-bank\banca de sange\fisiere.h
+	"structs.h"
+
+1615492078 c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\blood-bank\banca de sange\ui.h
+
+1616000950 source:c:\users\admin\dropbox\my pc (desktop-5tm6i42)\desktop\maria\blood-bank\banca de sange\ui.cpp
+	<bits/stdc++.h>
+	<windows.h>
+	<conio.h>
+	<unistd.h>
+	<chrono>
+	<thread>
+	<stdio.h>
+	"functii.h"
+	"fisiere.h"
+
