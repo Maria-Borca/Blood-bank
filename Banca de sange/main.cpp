@@ -8,7 +8,6 @@
 #include "functii.h"
 #include "ui.h"
 
-
 using namespace std;
 
 

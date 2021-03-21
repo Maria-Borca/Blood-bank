@@ -28,14 +28,14 @@ void afisarePacientConsola(Pacient pacient)
 
 void afisareSpitalConsola(Spital spital)
 {
-    cout << "Donatorii: \n";
+    cout << "Donatorii: \n\n";
     for (int i = 1; i <= spital.numarDonatori; i ++)
     {
         afisareDonatorConsola(spital.donatori[i]);
         cout << '\n';
     }
-    cout << '\n';
-    cout << "Pacienti: \n";
+    cout << "\n\n";
+    cout << "Pacienti: \n\n";
     for (int i = 1; i <= spital.numarPacienti; i ++)
     {
         afisarePacientConsola(spital.pacienti[i]);
@@ -45,7 +45,7 @@ void afisareSpitalConsola(Spital spital)
 
 void afisareIstoricConsola(Spital spital)
 {
-    cout << "Numarul Pacientilor cu donatori este:" << spital.istoric.contor << '\n';
+    cout << "Numarul Pacientilor cu donatori este: " << spital.istoric.contor << "\n\n";
     for (int i = 1; i <= spital.istoric.contor; i ++)
     {
         int pozPacient = cautareCNPPacient(spital.pacienti, spital.numarPacienti, spital.istoric.legaturi[i].cnpPacient);
@@ -96,10 +96,11 @@ void adaugaDonator(Donator donatori[], int &numarDonatori, Pacient pacienti[], i
             cin >> cnp;
             usleep(5);
             system("CLS");
+            varsta = aflareVarsta(cnp);
             if (verificareCNP(cnp) && cnpUnic(donatori, numarDonatori, pacienti, numarPacienti, cnp))
             {
+
                 gen = aflareGen(cnp);
-                varsta = aflareVarsta(cnp);
             }
             else
             {
@@ -108,9 +109,15 @@ void adaugaDonator(Donator donatori[], int &numarDonatori, Pacient pacienti[], i
                 getch();
                 system("CLS");
             }
+            if (varsta < 18 || varsta > 60)
+            {
+                break;
+            }
 
         }
         while(verificareCNP(cnp) == 0 || cnpUnic(donatori, numarDonatori, pacienti, numarPacienti, cnp) == 0);
+        if (varsta < 18 || varsta > 60)
+            break;
         do
         {
             cout << "Confirmati CNP-ul:\n";
@@ -126,6 +133,8 @@ void adaugaDonator(Donator donatori[], int &numarDonatori, Pacient pacienti[], i
             }
         }
         while(verificareCNP(cnp2) == 0 || cnpUnic(donatori, numarDonatori, pacienti, numarPacienti, cnp2) == 0);
+        if (varsta < 18 || varsta > 60)
+            break;
         if (strcmp(cnp,cnp2) != 0)
         {
             cout << "CNP-urile nu corespund!\n";
@@ -133,14 +142,20 @@ void adaugaDonator(Donator donatori[], int &numarDonatori, Pacient pacienti[], i
             getch();
             system("CLS");
         }
+        if (varsta < 18 || varsta > 60)
+            break;
     }
     while(strcmp(cnp,cnp2) != 0);
-    adaugareDonator(donatori, numarDonatori, nume, prenume, grupaSanguina, cnp, gen, varsta);
-    cout << "Donatorul a fost adaugat cu succes!\n";
-    cout << "Apasati orice tasta pentru a continua!\n";
-    getch();
-    system("CLS");
-    afisareDonatoriInDonatoriTxt(donatori, numarDonatori);
+    if (varsta > 18 && varsta < 60)
+    {
+        adaugareDonator(donatori, numarDonatori, nume, prenume, grupaSanguina, cnp, gen, varsta);
+        cout << "Donatorul a fost adaugat cu succes!\n";
+        cout << "Apasati orice tasta pentru a continua!\n";
+        getch();
+        system("CLS");
+        afisareDonatoriInDonatoriTxt(donatori, numarDonatori);
+    }
+
 }
 
 void adaugaPacient(Pacient pacienti[], int &numarPacienti, Donator donatori[], int numarDonatori)
@@ -222,30 +237,13 @@ void adaugaPacient(Pacient pacienti[], int &numarPacienti, Donator donatori[], i
     adaugarePacient(pacienti, numarPacienti, nume, prenume, grupaSanguina, cnp, gen, varsta);
     cout << "Pacientul a fost adaugat cu succes!\n";
     cout << "Apasati orice tasta pentru a va reitoarce la meniu!\n";
-    getch();
+    sleep(100);
     system("CLS");
     afisarePacientiInPacientiTxt(pacienti, numarPacienti);
 }
 
-void updateazaDonator (Donator donatori[], int numarDonatori)
+void updateazaDonator (Donator donatori[], int numarDonatori, char cnp[])
 {
-    char cnp[15];
-    do
-    {
-        cout << "Scrie-ti CNP-ul: \n";
-        cin >> cnp;
-        usleep(5);
-        system("CLS");
-        if (cautareCNPDonator(donatori, numarDonatori, cnp) == 0)
-        {
-            cout << "CNP-ul nu se afla in baza de date!\n";
-            cout << "Apasati orice tasta pentru a-l reintroduce!\n";
-            getch();
-            system("CLS");
-        }
-    }
-    while (cautareCNPDonator(donatori, numarDonatori, cnp) == 0);
-    system("CLS");
     int pozitieDonator = cautareCNPDonator(donatori, numarDonatori, cnp);
     char numeNou[105], prenumeNou[105], grupaSanguinaNoua[5];
     cout << "Scrie numele: \n";
@@ -358,7 +356,7 @@ bool intrebari ()
     int ok=1;
     fin.get();
     char intrebare[305], raspuns[105], raspunsCorect[5];
-    for(int i = 1; i <= n and ok == 1; i ++)
+    for(int i = 1; i <= n && ok == 1; i ++)
     {
         fin.getline(intrebare, 305);
         cout << intrebare << '\n';
@@ -406,7 +404,7 @@ void cautareDonator(Spital &spital)
     cout << "Introduceti CNP-ul pacientului:\n";
     cin >> cnp;
     int poz = cautareCNPPacient(spital.pacienti, spital.numarPacienti, cnp);
-    if (poz)
+    if (poz && pacientulSeAflaInIstoric(cnp, spital.istoric) == 0)
     {
         int pozDonator = cautaDonator(poz, spital);
         if (pozDonator != -1)
@@ -416,6 +414,15 @@ void cautareDonator(Spital &spital)
             afisareDonatorConsola(spital.donatori[pozDonator]);
         }
         else cout << "Nu s-a gasit niciun donator compatibil!";
+    }
+    else if (pacientulSeAflaInIstoric(cnp, spital.istoric) != 0)
+    {
+        int pozInIstoric = pacientulSeAflaInIstoric(cnp, spital.istoric);
+        int pozDonator = cautareCNPDonator(spital.donatori, spital.numarDonatori, spital.istoric.legaturi[pozInIstoric].cnpDonator);
+        afisarePacientConsola(spital.pacienti[poz]);
+        cout << " -----> ";
+        afisareDonatorConsola(spital.donatori[pozDonator]);
+        cout << '\n';
     }
     else cout << "Nu exista niciun pacient cu acest CNP!\n";
 }
@@ -471,28 +478,63 @@ void meniu(Spital &spital)
         SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 11);
         if (intrebari() == 0)
             break;
+        int nrDon = spital.numarDonatori;
         adaugaDonator(spital.donatori, spital.numarDonatori, spital.pacienti, spital.numarPacienti);
-        char optiune;
-        cout << "Donatorul: \n";
-        afisareDonatorConsola(spital.donatori[spital.numarDonatori]);
-        cout << '\n';
-        cout << "Apasati tasta 1 daca ati gresit numele sau prenumele sau orice tasta daca e totul corect!\n";
-        cin >> optiune;
-        while (optiune == '1')
+        if (nrDon != spital.numarDonatori)
         {
-            system("CLS");
-            updateazaDonator(spital.donatori, spital.numarDonatori);
+            char optiune;
+            cout << "Donatorul: \n";
             afisareDonatorConsola(spital.donatori[spital.numarDonatori]);
             cout << '\n';
             cout << "Apasati tasta 1 daca ati gresit numele sau prenumele sau orice tasta daca e totul corect!\n";
             cin >> optiune;
+            while (optiune == '1')
+            {
+                char cnp[15];
+                int pozitieDonator;
+                do
+                {
+                    cout << "Scrie-ti CNP-ul: \n";
+                    cin >> cnp;
+                    pozitieDonator = cautareCNPDonator(spital.donatori, spital.numarDonatori, cnp);
+                    usleep(5);
+                    system("CLS");
+                    if (cautareCNPDonator(spital.donatori, spital.numarDonatori, cnp) == 0)
+                    {
+                        cout << "CNP-ul nu se afla in baza de date!\n";
+                        cout << "Apasati orice tasta pentru a-l reintroduce!\n";
+                        getch();
+                        system("CLS");
+                    }
+                    if (pozitieDonator != spital.numarDonatori)
+                    {
+                        cout << "CNP-ul introdus nu corespunde cu cel al dumneavoastra!\n";
+                        cout << "Apasati orice tasta pentru a-l reintroduce!\n";
+                        getch();
+                        system("CLS");
+                    }
+                }
+                while (cautareCNPDonator(spital.donatori, spital.numarDonatori, cnp) == 0 && pozitieDonator != spital.numarDonatori);
+                system("CLS");
+                updateazaDonator(spital.donatori, spital.numarDonatori, cnp);
+                afisareDonatorConsola(spital.donatori[spital.numarDonatori]);
+                cout << '\n';
+                cout << "Apasati tasta 1 daca ati gresit numele sau prenumele sau orice tasta daca e totul corect!\n";
+                cin >> optiune;
+            }
+            getch();
+            system("CLS");
+            cout << "Multumim ca v-ati inregistrat!\nAti salvat o viata!\n";
+            getch();
+            system("CLS");
+            break;
         }
-        getch();
-        system("CLS");
-        cout << "Multumim ca v-ati inregistrat!\nAti salvat o viata!\n";
-        getch();
-        system("CLS");
-        break;
+        else {
+            cout << "Nu aveti varsta potrivita pentru a dona!\n";
+            getch();
+            system("CLS");
+            break;
+        }
     }
     case 2:
     {
@@ -503,7 +545,7 @@ void meniu(Spital &spital)
             system("CLS");
             cout << "Daca vreti sa iesiti din aplicatie apasati tasta 0\n";
             cout << "Daca vreti sa introduceti un pacient apasati tasta 1\n";
-            cout << "Daca vreti sa modificati un pacient apasati tasta 2\n";
+            cout << "Daca vreti sa modificati numele si prenumele unui pacient apasati tasta 2\n";
             cout << "Daca vreti sa cautati un donator pentru un pacient apasati tasta 3\n";
             cout << "Daca vreti sa afisati donatorii si pacientii compatibili si numarul lor apasati tasta 4\n";
             cout << "Daca vreti sa afisati toti donatorii si pacientii apasati tasta 5\n";
@@ -548,7 +590,7 @@ void meniu(Spital &spital)
                     cout << "Daca vreti sa vedeti procentul persoanelor intre 50 si 60 de ani care vor sa doneze sange 7\n";
                     cout << "Daca vreti sa vedeti varsta medie a donatorilor apasati tasta 8\n";
                     cout << "Daca vreti sa vedeti varsta medie a pacientilor apasati tasta 9\n";
-                    cout << "Daca vreti sa vedeti de ce grupe de sange mai are nevoie banca 10\n";
+                    cout << "Daca vreti sa vedeti de ce grupe de sange mai are nevoie banca 10\n\n";
                     cout << "Optiunea ta este: ";
                     cin >> numarStatistica;
 

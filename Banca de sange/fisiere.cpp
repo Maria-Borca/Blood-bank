@@ -10,21 +10,16 @@ fstream filePacienti ("pacienti.txt", std::fstream::in | std::fstream::out | std
 void citireDonator(Donator &donator)
 {
     fileDonatori >> donator.nume >> donator.prenume >> donator.cnp >> donator.grupaSanguina;
-    if (verificareCNP(donator.cnp))
-    {
-        donator.varsta = aflareVarsta(donator.cnp);
-        donator.gen = aflareGen(donator.cnp);
-    }
+    donator.varsta = aflareVarsta(donator.cnp);
+    donator.gen = aflareGen(donator.cnp);
 }
 
 void citirePacient(Pacient &pacient)
 {
     filePacienti >> pacient.nume >> pacient.prenume >> pacient.cnp >> pacient.grupaSanguina;
-    if (verificareCNP(pacient.cnp))
-    {
-        pacient.varsta = aflareVarsta(pacient.cnp);
-        pacient.gen = aflareGen(pacient.cnp);
-    }
+    pacient.varsta = aflareVarsta(pacient.cnp);
+    pacient.gen = aflareGen(pacient.cnp);
+
 }
 
 void citireSpital(Spital &spital)

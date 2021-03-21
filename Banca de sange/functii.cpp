@@ -24,6 +24,7 @@ bool verificareGrupaSanguina (char grupaSanguina[])
 bool verificareCNP (char cnp[])
 {
     char constanta[13] = "279146358279";
+    int sum = 0, cc;
     if (strlen(cnp) != 13)
         return 0;
     for (int i = 0; i < strlen(cnp); i ++)
@@ -41,7 +42,6 @@ bool verificareCNP (char cnp[])
         return 0;
     if (jud < 1 || jud > 48)
         return 0;
-    int sum = 0, cc;
     for (int i = 0; i <= 11; i ++)
         sum += (constanta[i] - 48) * (cnp[i] - 48);
     cc = sum % 11;
@@ -111,20 +111,20 @@ void calcularePosibilitati(Spital &spital)
         spital.posibilitati[spital.numarPacienti + 1][j] = sumaPeColoane(spital.posibilitati, j, spital.numarPacienti);
 }
 
-bool pacientulSeAflaInIstoric(char cnp[], Istoric istoric)
+int pacientulSeAflaInIstoric(char cnp[], Istoric istoric)
 {
     for (int i = 1; i <= istoric.contor; i ++)
         if (strcmp(cnp, istoric.legaturi[i].cnpPacient) == 0)
-            return 0;
-    return 1;
+            return i;
+    return 0;
 }
 
-bool donatorulSeAflaInIstoric(char cnp[], Istoric istoric)
+int donatorulSeAflaInIstoric(char cnp[], Istoric istoric)
 {
     for (int i = 1; i <= istoric.contor; i ++)
         if (strcmp(cnp, istoric.legaturi[i].cnpDonator) == 0)
-            return 0;
-    return 1;
+            return i;
+    return 0;
 }
 
 int cautaDonator(int pozPacient, Spital &spital)
@@ -133,7 +133,7 @@ int cautaDonator(int pozPacient, Spital &spital)
     for (int j = 1; j <= spital.numarDonatori; j ++)
         if (spital.posibilitati[i][j] == 1
                 && spital.posibilitati[spital.numarPacienti + 1][j] < minn
-                && donatorulSeAflaInIstoric(spital.donatori[j].cnp, spital.istoric))
+                && donatorulSeAflaInIstoric(spital.donatori[j].cnp, spital.istoric) == 0)
         {
             minn = spital.posibilitati[spital.numarPacienti + 1][j];
             coloana = j;
@@ -220,40 +220,40 @@ void corectareNPG (char nume[])
 
 
 
-int procentFemeiCareDoneaza(Donator donatori[], int numarDonatori)
+float procentFemeiCareDoneaza(Donator donatori[], int numarDonatori)
 {
     int cont = 0;
     for (int i = 1; i <= numarDonatori; i ++)
         if (donatori[i].gen == 'F')
             cont ++;
-    return cont * 100 / numarDonatori;
+    return (float)cont * 100 / numarDonatori;
 }
 
-int procentFemeiPacient(Pacient pacienti[], int numarPacienti)
+float procentFemeiPacient(Pacient pacienti[], int numarPacienti)
 {
     int cont = 0;
     for (int i = 1; i <= numarPacienti; i ++)
         if (pacienti[i].gen == 'F')
             cont ++;
-    return cont * 100 / numarPacienti;
+    return (float)cont * 100 / numarPacienti;
 }
 
-int procentBarbatiCareDoneaza(Donator donatori[], int numarDonatori)
+float procentBarbatiCareDoneaza(Donator donatori[], int numarDonatori)
 {
     int cont = 0;
     for (int i = 1; i <= numarDonatori; i ++)
         if (donatori[i].gen == 'M')
             cont ++;
-    return cont * 100 / numarDonatori;
+    return (float)cont * 100 / numarDonatori;
 }
 
-int procentBarbatiPacient(Pacient pacienti[], int numarPacienti)
+float procentBarbatiPacient(Pacient pacienti[], int numarPacienti)
 {
     int cont = 0;
     for (int i = 1; i <= numarPacienti; i ++)
         if (pacienti[i].gen == 'M')
             cont ++;
-    return cont * 100 / numarPacienti;
+    return (float)cont * 100 / numarPacienti;
 }
 
 double vastaMedieDonatori(Donator donatori[], int numarDonatori)
@@ -261,7 +261,7 @@ double vastaMedieDonatori(Donator donatori[], int numarDonatori)
     double medie = 0;
     for (int i = 1; i <= numarDonatori; i ++)
         medie += donatori[i].varsta;
-    return medie/numarDonatori;
+    return medie / numarDonatori;
 }
 
 double vastaMediePacienti(Pacient pacienti[], int numarPacienti)
@@ -269,16 +269,16 @@ double vastaMediePacienti(Pacient pacienti[], int numarPacienti)
     double medie = 0;
     for (int i = 1; i <= numarPacienti; i ++)
         medie += pacienti[i].varsta;
-    return medie/numarPacienti;
+    return medie / numarPacienti;
 }
 
-int procentDonatoriIntervalVarsta(Donator donatori[], int numarDonatori, int x, int y)
+float procentDonatoriIntervalVarsta(Donator donatori[], int numarDonatori, int x, int y)
 {
     int nrInterval = 0;
     for (int i = 1; i <= numarDonatori; i ++)
         if (donatori[i].varsta >= x && donatori[i].varsta <= y)
             nrInterval ++;
-    return nrInterval * 100 / numarDonatori;
+    return (float) nrInterval * 100 / numarDonatori;
 }
 
 int numarDonatoriGrupa (Donator donatori[], int numarDonatori, char grupaSanguina[])
